@@ -1,8 +1,6 @@
 import "../styles/globals.css";
 import { NotificationProvider } from "../src/contexts/NotificationProvider";
-import Script from "next/script";
 import Head from "next/head";
-import { Web3Provider } from "@ethersproject/providers";
 import ToastProvider from "../src/providers/toast";
 
 function MyApp({ Component, pageProps }) {
