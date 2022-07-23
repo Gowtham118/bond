@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { UilUserCircle } from "@iconscout/react-unicons";
 import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
-import ConnectMetamask from "../connectMetamask/ConnectMetamask";
+import ConnectMetamask, { MetamaskContext } from "../connectMetamask/ConnectMetamask";
 
 const ActiveTabIndicator = () => (
   <svg
@@ -49,16 +49,12 @@ const NavItem = ({ route, Icon, label }) => {
 };
 
 function NavigationBar() {
-  const router = useRouter();
-  const { address } = ConnectMetamask();
-  const reload = () => {
-    router.reload();
-  };
+  const { address } = useContext(MetamaskContext);
 
   return (
     <nav className="grid items-center w-full grid-cols-2 lg:grid-cols-[0.5fr_1fr_0.5fr] lg:px-12 ">
       <span className="px-3 py-4 xs:px-0 xs:py-6">
-        <div onClick={reload} className="hover:cursor-pointer">
+        <div  className="hover:cursor-pointer">
           <a className="flex items-center w-max">
             <div className="text-primary font-bold text-4xl tracking-[8px] leading-6">
               BOND
