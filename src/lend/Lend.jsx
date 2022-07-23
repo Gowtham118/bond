@@ -7,7 +7,7 @@ import { tokens } from "../data/tokens";
 import DottedButton from "../layouts/DottedButton";
 import ConnectMetamask from "../connectMetamask/ConnectMetamask";
 
-export default function Lend({ address, balance }) {
+export default function Lend({ address, balance , provider  }) {
   return (
     <div className="flex flex-col items-center h-screen text-white md:px-8 lg:h-auto lg:min-h-screen bg-black-800">
       <NavigationBar />
@@ -25,7 +25,7 @@ export default function Lend({ address, balance }) {
             <div className="flex flex-col gap-1 p-4">
               {/* If user connected to wallet */}
               {address ? (
-                <TokenCard balance={balance} token={tokens && tokens[0]} />
+                <TokenCard balance={balance} token={tokens && tokens[0]} provider = {provider}/>
               ) : (
                 <DottedButton onClick={ConnectMetamask} >Connect Wallet</DottedButton>
               )}

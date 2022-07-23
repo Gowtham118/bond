@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 const ConnectMetamask = () => {
   const [address, setAddress] = useState("");
   const [balance, setBalance] = useState(0);
+  const [provider, setProvider] = useState(null);
+  
   useEffect(() => {
     (async function connectMetamask() {
       try {
@@ -19,11 +21,15 @@ const ConnectMetamask = () => {
             window.ethereum,
             "rinkeby"
           );
+          //console.log(provider)
           // Prompt user for account connections
           await provider.send("eth_requestAccounts", []);
           const signer = provider.getSigner();
           setAddress(await signer.getAddress());
           setBalance(await signer.getBalance());
+          setProvider(provider);
+          
+          
         } else {
           toast.error("Please connect to Metamask");
         }
@@ -32,7 +38,9 @@ const ConnectMetamask = () => {
       }
     })();
   }, []);
-  return { address, balance: ethers.utils.formatEther(balance) };
+  
+  //const a = new ethers.providers.Web3Provider(window.ethereum);
+  return { address, balance: ethers.utils.formatEther(balance) , provider };
 };
 
 export default ConnectMetamask;
