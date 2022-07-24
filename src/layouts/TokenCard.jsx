@@ -1,11 +1,15 @@
 import React, { useContext } from "react";
+import web3 from "web3";
 import Image from "next/image";
 import Badge from "./Badge";
 import { useRouter } from "next/router";
 import { ethers } from "ethers";
 import ERC20_ABI from "../data/bond.json";
+import ERC20 from "../data/erc20.json";
 import { MetamaskContext } from "../connectMetamask/ConnectMetamask";
 import { useNotification } from "../contexts/NotificationProvider";
+const cpgTokenAdd = "0x150520503Ae8b49bFE5EFBefAFaBac86e093715B";
+
 
 const toFixed = (n, precision = 4) => {
   if (n === undefined || n === null) return n;
@@ -22,23 +26,21 @@ const TokenCard = ({ token,isCPG=false }) => {
   const { balance } = useContext(MetamaskContext);
   const router = useRouter();
   const pushNotification = useNotification();
-  let showFiat;
-  //provider = new ethers.providers.Web3Provider(window.ethereum, "rinkeby");
-  //ethereum.send("eth_requestAccounts", []);
   const provider = new ethers.providers.Web3Provider(
     window.ethereum,
     "rinkeby"
   );
   const signer = provider.getSigner();
   const contract = new ethers.Contract(
-    "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "0x41723d9b7F996CF15D180e30D523bFC59773F1b6",
     ERC20_ABI.abi,
     signer
   );
   const sendEther = async () => {
     const amount = ethers.utils.parseEther("0.01");
-    let tx = {
-      to: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+
+    let tx ={
+      to: "0x41723d9b7F996CF15D180e30D523bFC59773F1b6",
       value: amount,
     };
     const txHash = await contract.signer.sendTransaction(tx);
@@ -52,7 +54,14 @@ const TokenCard = ({ token,isCPG=false }) => {
     //   );
     // }
     console.log(txHash);
-  };
+
+  } 
+  const doBorrow = async () => {
+    const amount = ethers.utils.parseEther("1000");
+    let tx = contract.borrow("ETH","0x41723d9b7F996CF15D180e30D523bFC59773F1b6",amount);
+
+    console.log(tx);
+  }
   const isLend = router.pathname === "/lend";
   return (
     <div className="flex flex-col items-center px-3 py-[14px] sm:flex-row bg-black-900 md:bg-black-800 rounded-xl">
@@ -87,7 +96,7 @@ const TokenCard = ({ token,isCPG=false }) => {
             if (isLend) {
               sendEther();
             } else {
-              //this.doBorrow();
+              doBorrow();
             }
           }}
           className={`justify-end mr-4 bg-grey-450  text-bold text-white ${
@@ -101,4 +110,6 @@ const TokenCard = ({ token,isCPG=false }) => {
   );
 };
 
+
 export default TokenCard;
+
