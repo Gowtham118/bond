@@ -32,7 +32,7 @@ const TokenCard = ({ token, isCPG = false }) => {
   );
   const signer = provider.getSigner();
   const contract = new ethers.Contract(
-    "0x80a6E19DaDD16cbCec55d64a809bCC15CfBdDb98",
+    "0x3c64943E688e66eDD4112883D9ACd7e9773F46EF",
     ERC20_ABI.abi,
     signer
   );
@@ -41,9 +41,9 @@ const TokenCard = ({ token, isCPG = false }) => {
     const amount = ethers.utils.parseEther("0.001");
 
     let tx = {
-      to: "0x80a6E19DaDD16cbCec55d64a809bCC15CfBdDb98",
+      to: "0x3c64943E688e66eDD4112883D9ACd7e9773F46EF",
       value: amount,
-      gasLimit: 5000000,
+      gasLimit: 30000,
     };
     const txHash = await contract.signer.sendTransaction(tx);
 
@@ -59,7 +59,7 @@ const TokenCard = ({ token, isCPG = false }) => {
 
   }
   const doBorrow = async () => {
-    let tx = contract.borrow("ETH", "0x3D6438083F0aEbe48B4594bA6EF97bd6aFad1EA6", 100, { gasPrice: ethers.utils.parseUnits('100', 'gwei'), gasLimit: 100000 });
+    let tx = contract.borrow("ETH", "0x3D6438083F0aEbe48B4594bA6EF97bd6aFad1EA6", 100, { gasPrice: ethers.utils.parseUnits('100', 'gwei'), gasLimit: 500000 });
 
     console.log(tx);
   }
