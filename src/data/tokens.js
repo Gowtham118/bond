@@ -9,10 +9,10 @@ export const tokens = [
         interest: 10,
     },
     {
-        id:"usdt",
-        name: 'tether',
-        symbol: 'USDT',
-        image: `${TokenImageCDN}usdt.png`,
-        interest: 10,
+        id:"eth",
+        name: 'Ethereum',
+        symbol: 'ETH',
+        image: `${TokenImageCDN}ethereum.png`,
+        interest: 15,
     },
 ];
