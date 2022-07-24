@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { MetamaskContext } from "../connectMetamask/ConnectMetamask";
 import { tokens } from "../data/tokens";
 import Card from "../layouts/Card";
 import ContentWrapper from "../layouts/ContentWrapper";
@@ -7,6 +8,7 @@ import TokenCard from "../layouts/TokenCard";
 import NavigationBar from "../navigation/NavigationBar";
 
 const Borrow = () => {
+  const {address} = useContext(MetamaskContext)
   return (
     <div className="flex flex-col items-center h-screen text-white md:px-8 lg:h-auto lg:min-h-screen bg-black-800">
       <NavigationBar />
