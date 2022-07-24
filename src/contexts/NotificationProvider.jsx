@@ -24,7 +24,7 @@ export const NotificationProvider = (props) => {
       topR: [],
       bottomR: [],
     };
-    state.forEach((toast) => toaster[toast.position]?.push(toast));
+    state.forEach((toast) => toaster[toast.position].push(toast));
 
     return (Object.keys(toaster)).map((pos) => {
       const position = `${pos === "topR" ? "right-10 top-24" : "right-10 bottom-10"}`;

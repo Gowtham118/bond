@@ -15,4 +15,11 @@ export const tokens = [
         image: `${TokenImageCDN}ethereum.png`,
         interest: 15,
     },
+    {
+        id:"cpg",
+        name: 'CPG',
+        symbol: 'CPG',
+        image: `${TokenImageCDN}dai.png`,
+        interest: 17,
+    },
 ];

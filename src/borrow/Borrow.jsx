@@ -23,10 +23,16 @@ const Borrow = () => {
           >
             <div className="flex flex-col gap-1 p-4">
               {/* If user connected to wallet */}
-              <TokenCard token={tokens && tokens[1]}/>
-              {/* If user not connected to wallet */}
-              {/* <DottedButton>Connect Wallet</DottedButton> */}
+              {address ? (
+                <>
+                  <TokenCard token={tokens && tokens[1]} />
+                  <TokenCard token={tokens && tokens[2]} isCPG={true} />
+                </>
+              ) : (
+                <DottedButton>Connect Wallet</DottedButton>
+              )}
             </div>
+            <div className="text-sm p-4 text-grey-500 font-semibold">Blocks remaining for next payment : 57</div>
           </ContentWrapper>
         </Card>
       </div>

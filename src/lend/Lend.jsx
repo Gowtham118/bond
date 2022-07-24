@@ -8,6 +8,7 @@ import DottedButton from "../layouts/DottedButton";
 import ConnectMetamask from "../connectMetamask/ConnectMetamask";
 
 export default function Lend({ address, balance , provider  }) {
+  
   return (
     <div className="flex flex-col items-center h-screen text-white md:px-8 lg:h-auto lg:min-h-screen bg-black-800">
       <NavigationBar />
@@ -31,6 +32,7 @@ export default function Lend({ address, balance , provider  }) {
               )}
               {/* If user not connected to wallet */}
             </div>
+            <div className="text-sm p-4 text-grey-500 font-semibold">Blocks remaining for withdrawal : 120</div>
           </ContentWrapper>
         </Card>
       </div>
