@@ -1,4 +1,5 @@
 const TokenImageCDN = "https://d2mj1no4zi8uvs.cloudfront.net/token-images/";
+import CPGImage from "../../public/images/cpg.jpeg";
 
 export const tokens = [
     {
@@ -19,7 +20,7 @@ export const tokens = [
         id:"cpg",
         name: 'CPG',
         symbol: 'CPG',
-        image: `${TokenImageCDN}dai.png`,
+        image: CPGImage,
         interest: 17,
     },
 ];
