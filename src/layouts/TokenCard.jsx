@@ -22,7 +22,7 @@ const toFixed = (n, precision = 4) => {
   return truncated;
 };
 
-const TokenCard = ({ token,isCPG=false }) => {
+const TokenCard = ({ token, isCPG = false }) => {
   const { balance } = useContext(MetamaskContext);
   const router = useRouter();
   const pushNotification = useNotification();
@@ -32,16 +32,18 @@ const TokenCard = ({ token,isCPG=false }) => {
   );
   const signer = provider.getSigner();
   const contract = new ethers.Contract(
-    "0x41723d9b7F996CF15D180e30D523bFC59773F1b6",
+    "0x80a6E19DaDD16cbCec55d64a809bCC15CfBdDb98",
     ERC20_ABI.abi,
     signer
   );
-  const sendEther = async () => {
-    const amount = ethers.utils.parseEther("0.01");
 
-    let tx ={
-      to: "0x41723d9b7F996CF15D180e30D523bFC59773F1b6",
+  const sendEther = async () => {
+    const amount = ethers.utils.parseEther("0.001");
+
+    let tx = {
+      to: "0x80a6E19DaDD16cbCec55d64a809bCC15CfBdDb98",
       value: amount,
+      gasLimit: 5000000,
     };
     const txHash = await contract.signer.sendTransaction(tx);
 
@@ -55,10 +57,9 @@ const TokenCard = ({ token,isCPG=false }) => {
     // }
     console.log(txHash);
 
-  } 
+  }
   const doBorrow = async () => {
-    const amount = ethers.utils.parseEther("1000");
-    let tx = contract.borrow("ETH","0x41723d9b7F996CF15D180e30D523bFC59773F1b6",amount);
+    let tx = contract.borrow("ETH", "0x3D6438083F0aEbe48B4594bA6EF97bd6aFad1EA6", 100, { gasPrice: ethers.utils.parseUnits('100', 'gwei'), gasLimit: 100000 });
 
     console.log(tx);
   }
@@ -79,18 +80,16 @@ const TokenCard = ({ token,isCPG=false }) => {
             />
           </div>
           <div className="text-sm text-grey-500 font-semibold">
-            Avl balance : {isCPG ? "10000000000000":`${toFixed(balance, 2)}`}
+            Avl balance : {isCPG ? "10000000000000" : `${toFixed(balance, 2)}`}
           </div>
         </div>
-          <input
-            type="number"
-            inputMode="decimal"
-            className="peer text-right w-[20%] border-b-[1px]  outline-none select-none font-[inherit] text-current bg-inherit font-bold hide-arrows"
-            value={showFiat}
-            disabled={showFiat}
-            step="any"
-            min={0}
-          />
+        <input
+          type="number"
+          inputMode="decimal"
+          className="peer text-right w-[20%] border-b-[1px]  outline-none select-none font-[inherit] text-current bg-inherit font-bold hide-arrows"
+          step="any"
+          min={0}
+        />
         <button
           onClick={() => {
             if (isLend) {
@@ -99,9 +98,8 @@ const TokenCard = ({ token,isCPG=false }) => {
               doBorrow();
             }
           }}
-          className={`justify-end mr-4 bg-grey-450  text-bold text-white ${
-            isLend ? "hover:bg-primary" : "hover:bg-navigationblue"
-          } rounded-32px py-2 px-4`}
+          className={`justify-end mr-4 bg-grey-450  text-bold text-white ${isLend ? "hover:bg-primary" : "hover:bg-navigationblue"
+            } rounded-32px py-2 px-4`}
         >
           {isLend ? "Lend" : "Borrow"}
         </button>
