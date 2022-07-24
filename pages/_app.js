@@ -1,43 +1,25 @@
 import "../styles/globals.css";
 import { NotificationProvider } from "../src/contexts/NotificationProvider";
-// import ToastProvider from "src/providers/toast";
-// import { MetaversalAccountProvider } from "src/contexts/useMetaversalAccount";
-import Script from "next/script";
 import Head from "next/head";
-import { Web3Provider } from "@ethersproject/providers";
-import { Web3ReactProvider } from "@web3-react/core";
-// import { ModalProvider } from "src/contexts/useModalProvider";
-
-function getLibrary(provider) {
-  return new Web3Provider(provider);
-}
+import ToastProvider from "../src/providers/toast";
+import {MetamaskProvider} from "../src/connectMetamask/ConnectMetamask";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
         <title>Bond - Decentralized lending and borrowing platform</title>
-        <meta
-          httpEquiv='Content-Security-Policy'
-        />
+        <meta httpEquiv="Content-Security-Policy" />
       </Head>
-
-      <Script src='/analytics.js' strategy='lazyOnload' />
-      <Script src='/analyticsUniversal.js' strategy='lazyOnload' />
-
-      <Web3ReactProvider getLibrary={getLibrary}>
+      <MetamaskProvider>
         <NotificationProvider>
-          {/* <MetaversalAccountProvider> */}
-            {/* <ModalProvider> */}
-              {/* <ToastProvider> */}
-                <Component {...pageProps} />
-              {/* </ToastProvider> */}
-            {/* </ModalProvider> */}
-          {/* </MetaversalAccountProvider> */}
+          <ToastProvider>
+            <Component {...pageProps} />
+          </ToastProvider>
         </NotificationProvider>
-      </Web3ReactProvider>
+      </MetamaskProvider>
     </>
   );
 }
 
-export default MyApp
+export default MyApp;

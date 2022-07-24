@@ -1,0 +1,35 @@
+.toastNotification {
+    /*source: https://fkhadra.github.io/react-toastify/how-to-style */
+    /* Font */
+    --toastify-font-family: PlusJakartaSans, sans-serif;
+  
+    /* Size */
+    --toastify-toast-min-height: 49px;
+    --toastify-toast-max-height: 500px;
+    --toastify-toast-width: 540px;
+  
+    /* Text Color */
+    --toastify-text-color-light: #fff;
+  
+    /* Background */
+    --toastify-color-light: #2cc995;
+    --toastify-color-dark: #121212;
+    --toastify-color-info: #3498db;
+    --toastify-color-success: #07bc0c;
+    --toastify-color-warning: #f1c40f;
+    --toastify-color-error: #e74c3c;
+    --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+  }
+  
+  .toast {
+    border-radius: 3.5rem;
+    padding: 1rem;
+  }
+  
+  .toastBody {
+    letter-spacing: 0.02rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 0;
+  }
+  
